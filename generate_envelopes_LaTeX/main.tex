@@ -1,0 +1,39 @@
+% NOTE: the csv file should have UTF8 encoding to get the accented letters right!
+%
+% for further information see:
+% http://stackoverflow.com/questions/18693139/how-to-convert-csv-files-encoding-to-utf-8
+% http://tex.stackexchange.com/questions/110570/characters-with-accents-not-recognized-even-with-inputenc-and-tex-message
+
+\documentclass[12pt]{article}
+
+\usepackage[magyar]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[export]{adjustbox}
+
+\usepackage{datatool}
+\pagestyle{empty}
+
+\begin{document}
+
+\DTLloaddb{cimlista}{cimlista_hazihoz_utf8.csv}
+
+\DTLforeach{cimlista}{%
+  \Name=Name,\Position=Position}{%
+  \clearpage
+
+ \hfill
+  \begin{tabular}{c@{}}
+    \\[5 cm]
+    \textbf{\Name} \\
+    \textit{\Position} \\
+    r\'{e}sz\'{e}re
+  \end{tabular}
+  
+  \hfill
+  
+  \pdfpageheight=148mm
+  \pdfpagewidth=210mm
+}
+
+\end{document}
